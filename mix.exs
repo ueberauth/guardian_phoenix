@@ -1,28 +1,90 @@
 defmodule GuardianPhoenix.MixProject do
   use Mix.Project
 
+  @name :guardian_phoenix
+  @version "2.0.0"
+  @elixir_version "~> 1.7"
+  @source_url "https://github.com/ueberauth/guardian_phoenix"
+
   def project do
+    production? = Mix.env() == :prod
+
     [
-      app: :guardian_phoenix,
-      version: "0.1.0",
-      elixir: "~> 1.7",
-      start_permanent: Mix.env() == :prod,
-      deps: deps()
+      app: @name,
+      version: @version,
+      elixir: @elixir_version,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      deps: deps(),
+      aliases: aliases(),
+      build_embedded: production?,
+      start_permanent: production?,
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        "coveralls.html": :test,
+        "coveralls.json": :test
+      ],
+      xref: [exclude: [:phoenix]],
+      dialyzer: [
+        plt_add_deps: :transitive,
+        plt_add_apps: [:mix],
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
+        flags: [:race_conditions, :no_opaque]
+      ],
+
+      # Hex
+      description: "Guardian & Phoenix integration",
+      package: package(),
+
+      # Docs
+      name: "Guardian.Phoenix",
+      docs: docs()
     ]
   end
 
-  # Run "mix help compile.app" to learn about applications.
   def application do
     [
       extra_applications: [:logger]
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      # Tools
+      {:credo, ">= 0.0.0", only: [:dev, :test], runtime: false},
+      {:dialyxir, ">= 1.0.0-rc4", only: [:dev], runtime: false},
+      {:ex_doc, ">= 0.0.0", only: [:dev], runtime: false},
+      {:excoveralls, ">= 0.0.0", only: [:test], runtime: false},
+      {:inch_ex, ">= 0.0.0", only: [:dev], runtime: false},
+    ]
+  end
+
+   defp package do
+    [
+      name: @name,
+      files: [
+        "lib",
+        "mix.exs",
+        "README*",
+        "LICENSE*"
+      ],
+      maintainers: [
+        "Daniel Neighman",
+        "Sonny Scroggin",
+        "Sean Callan",
+        "Yordis Prieto"
+      ],
+      licenses: ["MIT"],
+      links: %{"GitHub" => @source_url}
+    ]
+  end
+
+  defp docs do
+    [
+      main: "readme",
+      homepage_url: @source_url,
+      source_ref: "v#{@version}",
+      source_url: @source_url,
+      extras: ["README.md"]
     ]
   end
 end
