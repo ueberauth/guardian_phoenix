@@ -15,7 +15,6 @@ defmodule GuardianPhoenix.MixProject do
       elixir: @elixir_version,
       elixirc_paths: elixirc_paths(Mix.env()),
       deps: deps(),
-      aliases: aliases(),
       build_embedded: production?,
       start_permanent: production?,
       test_coverage: [tool: ExCoveralls],
@@ -52,7 +51,11 @@ defmodule GuardianPhoenix.MixProject do
 
   defp deps do
     [
-      {:phoenix, "~> 1.3"},
+      {:guardian, path: "../guardian"},
+      {:phoenix, "1.3.2"},
+
+      # Test
+      {:jason, "~> 1.1", only: [:dev, :test], runtime: false},
 
       # Tools
       {:credo, ">= 0.0.0", only: [:dev, :test], runtime: false},

@@ -3,7 +3,7 @@ defmodule Guardian.Phoenix.SocketTest do
   use ExUnit.Case, async: true
   use Phoenix.ChannelTest
 
-  @endpoint __MODULE__.Endpoint
+  @endpoint Guardian.Phoenix.SocketTest.Endpoint
 
   @resource %{id: "bobby"}
 
