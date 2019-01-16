@@ -1,0 +1,25 @@
+language: elixir
+sudo: false
+notifications:
+  email: false
+
+elixir:
+  - 1.6
+
+otp_release:
+  - 20.3
+  - 21.0
+
+script:
+  - make testing
+
+cache:
+  directories:
+    - _build
+    - deps
+    - priv/plts
+
+after_script:
+  - make docs
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

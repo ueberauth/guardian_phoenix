@@ -1,0 +1,13 @@
+/_build
+/deps
+/.dialyzer
+erl_crash.dump
+*.ez
+doc
+.DS_Store
+.elixir_ls/
+/docs
+/cover
+/priv/plts/*.plt
+/priv/plts/*.plt.hash
+*.swp
