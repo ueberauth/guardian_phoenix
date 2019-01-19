@@ -51,7 +51,7 @@ defmodule GuardianPhoenix.MixProject do
 
   defp deps do
     [
-      {:guardian, path: "../guardian"},
+      {:guardian, github: "ueberauth/guardian", ref: "58fda3be5864581e891bb7117f11172c2b6d0130"},
       {:phoenix, "1.3.2"},
 
       # Test

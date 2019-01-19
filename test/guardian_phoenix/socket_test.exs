@@ -3,25 +3,24 @@ defmodule Guardian.Phoenix.SocketTest do
   use ExUnit.Case, async: true
   use Phoenix.ChannelTest
 
-  @endpoint Guardian.Phoenix.SocketTest.Endpoint
+  alias Guardian.Phoenix.TestSupport.{MySocket, Impl, Endpoint}
 
+  @endpoint Endpoint
   @resource %{id: "bobby"}
 
   setup do
-    impl = __MODULE__.Impl
-    {:ok, token, claims} = Guardian.encode_and_sign(impl, @resource)
+    {:ok, token, claims} = Guardian.encode_and_sign(Impl, @resource)
 
     {:ok,
      socket: socket("user_id", %{some: :assign}),
-     socket_mod: __MODULE__.MySocket,
-     impl: impl,
+     socket_mod: MySocket,
+     impl: Impl,
      token: token,
      claims: claims}
   end
 
   test "signs in the user", ctx do
     assert {:ok, socket} = ctx.socket_mod.connect(%{"guardian_token" => ctx.token}, ctx.socket)
-
     assert Guardian.Phoenix.Socket.current_token(socket) == ctx.token
     assert Guardian.Phoenix.Socket.current_claims(socket) == ctx.claims
     assert Guardian.Phoenix.Socket.current_resource(socket) == @resource
