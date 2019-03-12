@@ -10,17 +10,22 @@ elixir:
 otp_release:
   - 21.1
   - 21.2
+  
+before_cache:
+  - rm -rf _build/$MIX_HOME/lib
+
+cache:
+  directories:
+    - _build/$MIX_HOME
+
+before_script:
+  - travis_wait mix dialyzer --plt
 
 script:
   - make testing
 
-cache:
-  directories:
-    - _build
-    - deps
-    - priv/plts
-
 after_script:
   - make docs
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
