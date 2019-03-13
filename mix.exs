@@ -26,7 +26,6 @@ defmodule GuardianPhoenix.MixProject do
       dialyzer: [
         plt_add_deps: :transitive,
         plt_add_apps: [:mix],
-        plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
         flags: [:race_conditions, :no_opaque]
       ],
 
