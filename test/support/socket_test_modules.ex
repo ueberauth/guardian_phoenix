@@ -1,10 +1,12 @@
-defmodule Guardian.Phoenix.SocketTest.Endpoint do
+defmodule Guardian.Phoenix.TestSupport.Endpoint do
   @moduledoc false
+
   use Phoenix.Endpoint, otp_app: :guardian
 end
 
-defmodule Guardian.Phoenix.SocketTest.Impl do
+defmodule Guardian.Phoenix.TestSupport.Impl do
   @moduledoc false
+
   use Guardian,
     otp_app: :guardian,
     issuer: "Me",
@@ -14,11 +16,12 @@ defmodule Guardian.Phoenix.SocketTest.Impl do
   def resource_from_claims(%{"sub" => id}), do: {:ok, %{id: id}}
 end
 
-defmodule Guardian.Phoenix.SocketTest.MySocket do
+defmodule Guardian.Phoenix.TestSupport.MySocket do
   @moduledoc false
+
   use Phoenix.Socket
   import Guardian.Phoenix.Socket
-  alias Guardian.Phoenix.SocketTest.Impl
+  alias Guardian.Phoenix.TestSupport.Impl
 
   def connect(%{"guardian_token" => token}, socket) do
     case authenticate(socket, Impl, token) do

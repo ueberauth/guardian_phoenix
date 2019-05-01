@@ -26,7 +26,6 @@ defmodule GuardianPhoenix.MixProject do
       dialyzer: [
         plt_add_deps: :transitive,
         plt_add_apps: [:mix],
-        plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
         flags: [:race_conditions, :no_opaque]
       ],
 
@@ -51,7 +50,7 @@ defmodule GuardianPhoenix.MixProject do
 
   defp deps do
     [
-      {:guardian, path: "../guardian"},
+      {:guardian, github: "ueberauth/guardian", branch: "master"},
       {:phoenix, "1.3.2"},
 
       # Test

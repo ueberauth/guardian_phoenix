@@ -1,33 +1,8 @@
-defmodule Guardian.Support.TokenModule do
+defmodule Guardian.Phoenix.TestSupport.TokenModule do
   @moduledoc """
   A simple json encoding of tokens for testing purposes
   """
   @behaviour Guardian.Token
-
-  defmodule SecretFetcher do
-    alias Guardian.Token.Jwt.SecretFetcher.SecretFetcherDefaultImpl
-
-    def fetch_signing_secret(mod, opts) do
-      if Keyword.has_key?(opts, :fetched_secret) do
-        val = Keyword.get(opts, :fetched_secret)
-        {:ok, val}
-      else
-        SecretFetcherDefaultImpl.fetch_signing_secret(mod, opts)
-      end
-    end
-
-    def fetch_verifying_secret(mod, headers, opts) do
-      if Keyword.has_key?(opts, :fetched_secret) do
-        val = Keyword.get(opts, :fetched_secret)
-        send(self(), {:secret_fetcher, headers})
-        {:ok, val}
-      else
-        SecretFetcherDefaultImpl.fetch_verifying_secret(mod, headers, opts)
-      end
-    end
-  end
-
-  import Guardian.Support.Utils, only: [send_function_call: 1]
 
   def token_id do
     send_function_call({__MODULE__, :token_id, []})
@@ -145,5 +120,9 @@ defmodule Guardian.Support.TokenModule do
 
       {:ok, {old_token, old_claims}, {new_t, new_c}}
     end
+  end
+
+  defp send_function_call(call) do
+    send(self(), call)
   end
 end
