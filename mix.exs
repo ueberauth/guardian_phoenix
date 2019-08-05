@@ -50,7 +50,7 @@ defmodule GuardianPhoenix.MixProject do
 
   defp deps do
     [
-      {:guardian, github: "ueberauth/guardian", branch: "master"},
+      {:guardian, "~> 2.0"},
       {:phoenix, "1.3.2"},
 
       # Test
