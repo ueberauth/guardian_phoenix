@@ -2,7 +2,7 @@ defmodule GuardianPhoenix.MixProject do
   use Mix.Project
 
   @name :guardian_phoenix
-  @version "2.0.0"
+  @version "2.0.1"
   @elixir_version "~> 1.7"
   @source_url "https://github.com/ueberauth/guardian_phoenix"
 
@@ -51,7 +51,7 @@ defmodule GuardianPhoenix.MixProject do
   defp deps do
     [
       {:guardian, "~> 2.0"},
-      {:phoenix, "1.3.2"},
+      {:phoenix, "~> 1.3"},
 
       # Test
       {:jason, "~> 1.1", only: [:dev, :test], runtime: false},
