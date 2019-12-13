@@ -7,7 +7,7 @@ Integration of Guardian and Phoenix.
 ```elixir
 def deps do
   [
-    {:guardian_phoenix, "~> "2.0"}
+    {:guardian_phoenix, "~> 2.0"}
   ]
 end
 ```
