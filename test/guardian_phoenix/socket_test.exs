@@ -1,12 +1,12 @@
 defmodule Guardian.Phoenix.SocketTest do
   @moduledoc false
   use ExUnit.Case, async: true
-  use Phoenix.ChannelTest
+  import Phoenix.ChannelTest
 
   alias Guardian.Phoenix.TestSupport.{MySocket, Impl, Endpoint}
 
-  @endpoint Endpoint
   @resource %{id: "bobby"}
+  @endpoint Endpoint
 
   setup do
     {:ok, token, claims} = Guardian.encode_and_sign(Impl, @resource)

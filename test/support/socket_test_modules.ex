@@ -2,6 +2,8 @@ defmodule Guardian.Phoenix.TestSupport.Endpoint do
   @moduledoc false
 
   use Phoenix.Endpoint, otp_app: :guardian
+
+  socket "/socket", Guardian.Phoenix.TestSupport.MySocket
 end
 
 defmodule Guardian.Phoenix.TestSupport.Impl do
@@ -14,6 +16,11 @@ defmodule Guardian.Phoenix.TestSupport.Impl do
 
   def subject_for_token(%{id: id}, _claims), do: {:ok, to_string(id)}
   def resource_from_claims(%{"sub" => id}), do: {:ok, %{id: id}}
+end
+
+defmodule Guardian.Phoenix.TestSupport.Presence do
+  use Phoenix.Presence, otp_app: :guardian,
+                      pubsub_server: Guardian.Phoenix.PubSub
 end
 
 defmodule Guardian.Phoenix.TestSupport.MySocket do
