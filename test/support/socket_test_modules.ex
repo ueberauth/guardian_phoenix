@@ -3,7 +3,7 @@ defmodule Guardian.Phoenix.TestSupport.Endpoint do
 
   use Phoenix.Endpoint, otp_app: :guardian
 
-  socket "/socket", Guardian.Phoenix.TestSupport.MySocket
+  socket("/socket", Guardian.Phoenix.TestSupport.MySocket)
 end
 
 defmodule Guardian.Phoenix.TestSupport.Impl do
@@ -19,8 +19,9 @@ defmodule Guardian.Phoenix.TestSupport.Impl do
 end
 
 defmodule Guardian.Phoenix.TestSupport.Presence do
-  use Phoenix.Presence, otp_app: :guardian,
-                      pubsub_server: Guardian.Phoenix.PubSub
+  use Phoenix.Presence,
+    otp_app: :guardian,
+    pubsub_server: Guardian.Phoenix.PubSub
 end
 
 defmodule Guardian.Phoenix.TestSupport.MySocket do
