@@ -14,4 +14,4 @@ end
 
 ## Documentation
 
-API documentation is available at [https://hexdocs.pm/guardian_phoenix](https://hexdocs.pm/guardian_phoenix)
+API documentation is available at [hexdocs/guardian_phoenix](https://hexdocs.pm/guardian_phoenix/Guardian.Phoenix.Socket.html)
