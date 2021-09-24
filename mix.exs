@@ -51,7 +51,7 @@ defmodule GuardianPhoenix.MixProject do
   defp deps do
     [
       {:guardian, "~> 2.0"},
-      {:phoenix, "~> 1.5"},
+      {:phoenix, "~> 1.6"},
 
       # Test
       {:jason, "~> 1.1", only: [:dev, :test], runtime: false},
